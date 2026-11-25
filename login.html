@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Login | UrbanSense</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            background: #F0EEF9;
+            color: #30354A;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 38px 30px;
+            text-align: center;
+            background: #FFFEFC;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(45, 75, 57, 0.10);
+        }
+
+        h1 {
+            margin-bottom: 12px;
+            color: #4E4B83;
+            font-size: 28px;
+        }
+
+        .description {
+            margin-bottom: 28px;
+            color: #77788C;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            text-align: left;
+            font-weight: bold;
+            color: #4E4B83;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #D8D4F0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #7774B8;
+            box-shadow: 0 0 0 3px rgba(66, 107, 89, 0.12);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #7774B8;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4E4B83;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 22px;
+            color: #7774B8;
+            text-decoration: none;
+        }
+
+        .note {
+            margin-top: 20px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #77788C;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <h1>Welcome Back</h1>
+
+        <p class="description">
+            Enter a display name to access your UrbanSense demo profile.
+        </p>
+
+        <form id="demo-login">
+            <label for="name">Your Display Name</label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                maxlength="40"
+                required
+                autocomplete="off"
+            >
+
+            <button type="submit">Continue to Profile</button>
+        </form>
+
+        <a href="/" class="back-link">
+            ← Back to Welcome
+        </a>
+
+        <p class="note">
+            Demo login only. No password or real account is required.
+            Please do not enter sensitive personal information.
+        </p>
+    </main>
+<script>document.getElementById('demo-login').addEventListener('submit',e=>{e.preventDefault();const n=document.getElementById('name').value.trim();if(!n)return;localStorage.setItem('urbanUser',n);location.href='/profile.html';});</script>
+</body>
+</html>

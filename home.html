@@ -1,0 +1,53 @@
+
+
+
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UrbanSense - Home</title><link rel="stylesheet" href="/static/css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"></head><body><div class="phone"><main class="content">
+
+
+
+<div class="home">
+
+  <header class="home-top">
+    <div class="brand">
+      <span class="logo"><span aria-hidden="true">❧</span></span>
+      Urbansense
+    </div>
+    <a class="avatar-btn" href="/profile.html" aria-label="Profile"><span aria-hidden="true">♙</span></a>
+  </header>
+
+  <section class="hello">
+    <h1>Hello, Citizen!</h1>
+    <p>Together for safer, healthier and cleaner neighborhoods.</p>
+  </section>
+
+  <section class="nwi-card">
+    <h2 class="nwi-title">Neighborhood Well-Being Index</h2>
+    <div class="legend">
+      <span><i class="dot dot-safe"></i>Safe / Clean</span>
+      <span><i class="dot dot-attention"></i>Needs Attention</span>
+      <span><i class="dot dot-hazard"></i>Hazard / Unlit</span>
+    </div>
+
+    <div class="map-wrap">
+      <div id="map"></div>
+
+      <span class="layer-chip" id="layer-chip">All layers</span>
+
+      <div class="map-tools">
+        <button class="tool" id="btn-layers" aria-label="Change map layer"><span aria-hidden="true">▱</span></button>
+        <button class="tool" id="btn-locate" aria-label="Go to my location"><span aria-hidden="true">◎</span></button>
+      </div>
+
+      <a class="fab" href="/report.html"><span aria-hidden="true">+</span> Report Hazard</a>
+    </div>
+  </section>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>window.URBAN = {"center": [19.076, 72.8777], "zones": [], "pins": []};</script>
+<script src="/static/js/home.js"></script>
+</main><nav class="nav" aria-label="Main navigation"><a href="/home.html">Home</a><a href="/report.html">Report</a><a href="/map.html">Map</a><a href="/rewards.html">Rewards</a><a href="/profile.html">Profile</a></nav></div></body></html>
+

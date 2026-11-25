@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UrbanSense - Report Hazard</title><link rel="stylesheet" href="/static/css/style.css"></head><body><div class="phone"><main class="content">
+<title>UrbanSense - Report Hazard</title>
+
+
+<div class="report">
+
+  <header class="report-top">
+    <a href="/home.html" class="back-btn" aria-label="Back"><span aria-hidden="true">‹</span></a>
+    <h1>Report Hazard</h1>
+    <span class="back-btn" style="visibility:hidden"><span aria-hidden="true">‹</span></span>
+  </header>
+
+  <!-- Camera area -->
+  <section class="cam-wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="canvas" hidden></canvas>
+    <img id="preview" alt="Captured hazard photo" hidden>
+
+    <span class="cam-badge" id="gps-badge">
+      <span class="dot-pulse"></span> Auto-detecting…
+    </span>
+
+    <div class="cam-chips">
+      <span class="chip" id="coord-chip"><span aria-hidden="true">⌖</span> Waiting for GPS…</span>
+      <span class="chip chip-ok" id="gps-chip"><span aria-hidden="true">⌖</span> GPS</span>
+    </div>
+
+    <div class="cam-controls" id="capture-controls">
+      <span class="side-icon"><span aria-hidden="true">▣</span></span>
+      <button type="button" class="shutter" id="btn-capture" aria-label="Capture photo"></button>
+      <span class="side-icon" style="visibility:hidden"><span aria-hidden="true">▣</span></span>
+    </div>
+
+    <div class="cam-controls" id="review-controls" hidden>
+      <button type="button" class="pill-btn pill-ghost" id="btn-retake">
+        <span aria-hidden="true">↻</span> Retake
+      </button>
+      <button type="button" class="pill-btn pill-solid" id="btn-use-photo">
+        <span aria-hidden="true">✓</span> Use Photo
+      </button>
+    </div>
+  </section>
+
+  <!-- Report form -->
+  <form id="report-form" class="report-form">
+
+    <div class="field-label">What is it?</div>
+    <div class="chip-row" id="category-row" role="radiogroup" aria-label="Hazard category">
+      <button type="button" class="cat-chip" data-value="unlit_street">Unlit Street</button>
+      <button type="button" class="cat-chip" data-value="pothole">Pothole</button>
+      <button type="button" class="cat-chip" data-value="open_drain">Open Drain</button>
+      <button type="button" class="cat-chip" data-value="waste_dump">Waste Dump</button>
+      <button type="button" class="cat-chip" data-value="broken_sidewalk">Broken Sidewalk</button>
+    </div>
+
+    <div class="field-label">Add details</div>
+    <div class="describe-box">
+      <textarea id="description" name="description" rows="2"
+        placeholder="Describe the issue..."></textarea>
+      <button type="button" class="mic-btn" id="btn-mic" aria-label="Voice input">
+        <span aria-hidden="true">🎙</span>
+      </button>
+    </div>
+
+    <div class="mode-row">
+      <button type="button" class="mode-btn is-active" id="mode-text">
+        <span aria-hidden="true">✓</span> Text
+      </button>
+      <button type="button" class="mode-btn" id="mode-voice">
+        <span aria-hidden="true">🎙</span> Voice Input
+      </button>
+    </div>
+
+    <div class="language-row" id="language-row" hidden>
+      <label for="voice-language">Speaking language:</label>
+      <select id="voice-language">
+        <option value="mr-IN">Marathi</option>
+        <option value="hi-IN">Hindi</option>
+        <option value="en-IN">English</option>
+      </select>
+    </div>
+
+    <p class="form-error" id="form-error" hidden></p>
+
+    <button type="submit" class="submit-btn" id="btn-submit" disabled>
+      Submit Report
+    </button>
+
+  </form>
+
+  <section class="result-card" id="result-card" hidden></section>
+
+</div>
+
+
+
+<script src="/static/js/report.js"></script>
+
+</main></div></body></html>

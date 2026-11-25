@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Urbansense Admin Portal</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body class="admin-body">
+
+
+<div class="admin-shell">
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <span class="logo"><span aria-hidden="true">❧</span></span>
+      <span>Urbansense</span>
+    </div>
+
+    <nav class="admin-nav">
+      <a href="/admin" class="admin-nav-link is-active"><span aria-hidden="true">▦</span><span>Tickets</span></a>
+      <a href="/home.html" class="admin-nav-link"><span aria-hidden="true">⌖</span><span>Citizen Map</span></a>
+      <a href="/report.html" class="admin-nav-link"><span aria-hidden="true">+</span><span>New Report</span></a>
+    </nav>
+
+    <div class="admin-sidebar-foot">
+      <div class="admin-ward">
+        <span class="admin-ward-label">Viewing</span>
+        <span class="admin-ward-value">Ward 12 &middot; Mahim</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-topbar">
+      <div>
+        <h1>Hazard Tickets</h1>
+        <p>Prioritized by risk, not by arrival order</p>
+      </div>
+      <div class="admin-search">
+        <span aria-hidden="true">⌕</span>
+        <input type="text" id="search-input" placeholder="Search by ID, hazard or location">
+      </div>
+    </header>
+
+    <section class="admin-stats" aria-label="Summary">
+      <div class="stat-card">
+        <span class="stat-icon stat-icon-open"><span aria-hidden="true">▦</span></span>
+        <div>
+          <span class="stat-value" id="stat-open">&ndash;</span>
+          <span class="stat-label">Open tickets</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon stat-icon-critical"><span aria-hidden="true">⚠</span></span>
+        <div>
+          <span class="stat-value" id="stat-critical">&ndash;</span>
+          <span class="stat-label">Critical risk</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon stat-icon-escalated"><span aria-hidden="true">ϟ</span></span>
+        <div>
+          <span class="stat-value" id="stat-escalated">&ndash;</span>
+          <span class="stat-label">Escalated</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon stat-icon-resolved"><span aria-hidden="true">✓</span></span>
+        <div>
+          <span class="stat-value" id="stat-resolved">&ndash;</span>
+          <span class="stat-label">Resolved</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-toolbar">
+      <div class="admin-filters">
+        <label class="admin-select">
+          <span aria-hidden="true">☷</span>
+          <select id="filter-status">
+            <option value="">All statuses</option>
+            <option value="open">Open</option>
+            <option value="in_progress">In progress</option>
+            <option value="escalated">Escalated</option>
+            <option value="resolved">Resolved</option>
+          </select>
+        </label>
+        <label class="admin-select">
+          <select id="filter-priority">
+            <option value="">All priorities</option>
+            <option value="CRITICAL">Critical</option>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
+          </select>
+        </label>
+      </div>
+      <button class="admin-escalate-btn" id="btn-escalate">
+        <span aria-hidden="true">ϟ</span> Run escalation check
+      </button>
+    </section>
+
+    <section class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Ticket</th>
+            <th>Hazard</th>
+            <th>Location</th>
+            <th>Risk</th>
+            <th>Priority</th>
+            <th>SLA</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="ticket-rows">
+          <tr class="admin-loading-row"><td colspan="7">Loading tickets&hellip;</td></tr>
+        </tbody>
+      </table>
+      <p class="admin-empty" id="empty-state" hidden>No tickets match these filters.</p>
+    </section>
+
+  </main>
+</div>
+
+<script id="icon-alert" type="text/template"><span aria-hidden="true">⚠</span></script>
+<script id="icon-clock" type="text/template"><span aria-hidden="true">◷</span></script>
+<script src="/static/js/admin-demo.js"></script>
+</body>
+</html>

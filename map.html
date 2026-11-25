@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanSense | Map</title>
+
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #F8F6F3;
+      color: #30354A;
+    }
+
+    /* Header */
+    header {
+      padding: 22px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .map-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .map-back {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      margin-top: 5px;
+      border: 1px solid #7774B8;
+      border-radius: 50%;
+      color: #7774B8;
+      background: transparent;
+      text-decoration: none;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .map-back:hover {
+      background: #7774B8;
+      color: white;
+    }
+
+    .map-heading {
+      flex: 1;
+    }
+
+    header h1 {
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: #77788C;
+    }
+
+    /* Map filters */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 22px 18px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .filters button {
+      border: 1px solid #7774B8;
+      border-radius: 20px;
+      padding: 10px 15px;
+      background: white;
+      color: #7774B8;
+      cursor: pointer;
+    }
+
+    .filters button.active {
+      background: #7774B8;
+      color: white;
+    }
+
+    /* Map */
+    #map {
+      height: 65vh;
+      min-height: 360px;
+      width: calc(100% - 32px);
+      max-width: 1100px;
+      margin: 0 auto 30px;
+      border-radius: 16px;
+      border: 1px solid #e4ddd0;
+      z-index: 1;
+    }
+
+    /* Legend */
+    .legend {
+      max-width: 1100px;
+      margin: 0 auto 24px;
+      padding: 0 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    #message {
+      padding: 0 22px 20px;
+      text-align: center;
+      color: #77788C;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 600px) {
+      header {
+        padding: 18px;
+      }
+
+      .map-header {
+        gap: 12px;
+      }
+
+      .map-back {
+        width: 38px;
+        height: 38px;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header with Back Button -->
+  <header class="map-header">
+
+    <a href="/home.html" class="map-back" aria-label="Back to Home">
+      &#8249;
+    </a>
+
+    <div class="map-heading">
+      <h1>Neighbourhood Map</h1>
+      <p>Explore reported hazards and community safety conditions.</p>
+    </div>
+
+  </header>
+
+  <!-- Map Filters -->
+  <div class="filters">
+    <button class="active" data-layer="all">All reports</button>
+    <button data-layer="night">Night Safety</button>
+    <button data-layer="road">Road Conditions</button>
+    <button data-layer="health">Public Health</button>
+  </div>
+
+  <!-- Map Legend -->
+  <div class="legend">
+    <span><i class="dot" style="background:#26966b"></i>Safe</span>
+    <span><i class="dot" style="background:#e6a23c"></i>Attention</span>
+    <span><i class="dot" style="background:#d84c4c"></i>Hazard</span>
+  </div>
+
+  <!-- Map Display -->
+  <div id="map"></div>
+
+  <p id="message">Loading neighbourhood reports…</p>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const map = L.map("map").setView([19.076, 72.8777], 14);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+        'OpenStreetMap contributors</a>'
+    }).addTo(map);
+
+    const markerLayer = L.layerGroup().addTo(map);
+
+    let reports = [];
+    let selectedLayer = "all";
+
+    function categoryLayer(category) {
+      if (category === "unlit_street") return "night";
+
+      if (
+        category === "pothole" ||
+        category === "broken_sidewalk"
+      ) return "road";
+
+      if (
+        category === "open_drain" ||
+        category === "waste_dump"
+      ) return "health";
+
+      return "all";
+    }
+
+    function markerColor(ticket) {
+      if (ticket.status === "resolved") return "#26966b";
+
+      if (ticket.priority === "CRITICAL") return "#d84c4c";
+
+      return "#e6a23c";
+    }
+
+    function renderReports() {
+      markerLayer.clearLayers();
+
+      const visible = reports.filter(ticket =>
+        Number.isFinite(Number(ticket.lat)) &&
+        Number.isFinite(Number(ticket.lon)) &&
+        (
+          selectedLayer === "all" ||
+          categoryLayer(ticket.category) === selectedLayer
+        )
+      );
+
+      visible.forEach(ticket => {
+        const marker = L.circleMarker(
+          [Number(ticket.lat), Number(ticket.lon)],
+          {
+            radius: 9,
+            color: "#ffffff",
+            weight: 2,
+            fillColor: markerColor(ticket),
+            fillOpacity: 0.95
+          }
+        );
+
+        marker.bindPopup(`
+          <strong>${escapeHtml(ticket.category_label || ticket.category)}</strong>
+          <br>Priority: ${escapeHtml(ticket.priority || "Unassigned")}
+          <br>Status: ${escapeHtml(ticket.status || "Unknown")}
+          <br>Risk score: ${escapeHtml(String(ticket.risk ?? "N/A"))}
+          <br>Report ID: ${escapeHtml(ticket.id || "N/A")}
+        `);
+
+        markerLayer.addLayer(marker);
+      });
+
+      document.getElementById("message").textContent =
+        `${visible.length} report(s) shown` +
+        (reports.length ? "" : " — no reports available yet.");
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    document.querySelectorAll("[data-layer]").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedLayer = button.dataset.layer;
+
+        document.querySelectorAll("[data-layer]").forEach(item =>
+          item.classList.toggle("active", item === button)
+        );
+
+        renderReports();
+      });
+    });
+
+    function loadReports() { reports = JSON.parse(localStorage.getItem('urbanTickets') || '[]'); renderReports(); }
+    loadReports();
+  </script>
+
+<nav class="nav" aria-label="Main navigation"><a href="/">Home</a><a href="/report">Report</a><a href="/map">Map</a><a href="/rewards">Rewards</a><a href="/profile">Profile</a><a href="/admin">Admin</a></nav>
+</body>
+</html>

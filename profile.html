@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UrbanSense - Profile</title><link rel="stylesheet" href="/static/css/style.css"></head><body><div class="phone"><main class="content">
+
+
+
+UrbanSense - Profile
+
+
+<style>
+.profile-page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #30354A;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.profile-header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.profile-card,
+.profile-stat,
+.profile-link {
+  background: #FFFEFC;
+  border: 1px solid #E9E5E0;
+  border-radius: 16px;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 28px 16px;
+}
+
+.profile-avatar {
+  width: 82px;
+  height: 82px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: #E8E5F7;
+  color: #7774B8;
+}
+
+.profile-card h2 {
+  margin: 8px 0;
+}
+
+.profile-card p,
+.profile-note {
+  color: #77788C;
+}
+
+.profile-status {
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #E8E5F7;
+  color: #7774B8;
+  font-size: 13px;
+}
+
+.profile-section {
+  margin-top: 24px;
+}
+
+.profile-section h2 {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.profile-stat {
+  min-width: 0;
+  padding: 16px 8px;
+  text-align: center;
+}
+
+.stat-icon {
+  display: block;
+  color: #7774B8;
+  margin-bottom: 8px;
+}
+
+.profile-stat strong {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.profile-stat span:last-child {
+  font-size: 12px;
+  color: #77788C;
+}
+
+.profile-note {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 12px;
+  margin-bottom: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.profile-link-icon,
+.profile-arrow {
+  color: #7774B8;
+}
+
+.profile-link > span:nth-child(2) {
+  flex: 1;
+}
+
+.profile-link strong,
+.profile-link small {
+  display: block;
+}
+
+.profile-link small {
+  margin-top: 5px;
+  color: #77788C;
+  font-size: 12px;
+}
+
+.profile-arrow {
+  font-size: 24px;
+}
+
+@media (max-width: 380px) {
+  .profile-stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+
+
+<div class="profile-page">
+  <header class="profile-header">
+    <a href="/home.html" class="back-btn" aria-label="Back">←</a>
+    <h1>My Profile</h1>
+    <a href="/" class="back-btn">Log Out</a>
+  </header>
+
+  <section class="profile-card">
+    <div class="profile-avatar">
+      <span aria-hidden="true">♙</span>
+    </div>
+    <h2><span id="profile-name">Guest Citizen</span></h2>
+    <p>UrbanSense Community Member</p>
+    <span class="profile-status">Community Contributor</span>
+  </section>
+
+  <section class="profile-section">
+    <h2>My Overview</h2>
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <span class="stat-icon"><span aria-hidden="true">✓</span></span>
+        <strong><span id="profile-reports">0</span></strong>
+        <span>Reports submitted</span>
+      </div>
+      <div class="profile-stat">
+        <span class="stat-icon"><span aria-hidden="true">❧</span></span>
+        <strong><span id="profile-points">0</span></strong>
+        <span>Civic Points</span>
+      </div>
+      <div class="profile-stat">
+        <span class="stat-icon"><span aria-hidden="true">◇</span></span>
+        <strong>50/100</strong>
+        <span>Trust score</span>
+      </div>
+    </div>
+    <p class="profile-note">
+      Your UrbanSense contribution statistics are saved to your demo profile.
+    </p>
+  </section>
+
+  <section class="profile-section">
+    <h2>My Activity</h2>
+
+    <a class="profile-link" href="/report.html">
+      <span class="profile-link-icon"><span aria-hidden="true">+</span></span>
+      <span>
+        <strong>Report a Hazard</strong>
+        <small>Help improve your neighbourhood</small>
+      </span>
+      <span class="profile-arrow">›</span>
+    </a>
+
+    <a class="profile-link" href="/map.html">
+      <span class="profile-link-icon"><span aria-hidden="true">⌖</span></span>
+      <span>
+        <strong>Neighbourhood Map</strong>
+        <small>Explore reported hazards</small>
+      </span>
+      <span class="profile-arrow">›</span>
+    </a>
+
+    <a class="profile-link" href="/rewards.html">
+      <span class="profile-link-icon"><span aria-hidden="true">♧</span></span>
+      <span>
+        <strong>My Rewards</strong>
+        <small>View your civic rewards</small>
+      </span>
+      <span class="profile-arrow">›</span>
+    </a>
+  </section>
+</div>
+
+<nav class="nav" aria-label="Main navigation"><a href="/home.html">Home</a><a href="/report.html">Report</a><a href="/map.html">Map</a><a href="/rewards.html">Rewards</a><a href="/profile.html">Profile</a><a href="/admin.html">Admin</a></nav></main></div></body></html>

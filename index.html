@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | UrbanSense</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #F0EEF9;
+            color: #30354A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .welcome-container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            background: #FFFEFC;
+            padding: 45px 35px;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(45, 75, 57, 0.10);
+        }
+
+        .logo {
+            display: block;
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            margin: 0 auto 22px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #4E4B83;
+        }
+
+        .intro {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #77788C;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            margin-top: 14px;
+            border: 2px solid #7774B8;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.2s ease;
+        }
+
+        .guest-button {
+            background: #7774B8;
+            color: white;
+        }
+
+        .guest-button:hover {
+            background: #4E4B83;
+        }
+
+        .login-button {
+            background: transparent;
+            color: #4E4B83;
+        }
+
+        .login-button:hover {
+            background: #F0EEF9;
+        }
+
+        .footer {
+            margin-top: 32px;
+            font-size: 12px;
+            color: #77788C;
+        }
+
+        @media (max-width: 480px) {
+            .welcome-container {
+                padding: 35px 22px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="welcome-container">
+
+       <img src="/static/images/logo.png" alt="UrbanSense Logo" style="width:220px; max-width:70%; height:auto;">
+
+        <h1>Welcome to UrbanSense</h1>
+
+        <p class="intro">
+            Help build safer streets, healthier communities,
+            and a greener tomorrow. Report local issues,
+            track your contributions, and make a difference
+            in your community.
+        </p>
+
+        <a href="/home.html" class="button guest-button">
+            Continue as Guest
+        </a>
+
+        <a href="/login.html" class="button login-button">
+    Log In
+</a>
+
+        <p class="footer">
+            UrbanSense · Safer Streets · Healthier Communities
+        </p>
+
+    </main>
+
+</body>
+</html>
